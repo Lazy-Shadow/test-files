@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocalMart - Everything You Need</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="bg-danger bg-gradient text-white sticky-top">
+        <div class="container-fluid px-4">
+            <div class="d-flex justify-content-between py-1 small" style="background: rgba(0,0,0,0.1);">
+                <div>Seller Centre | Download | Follow us on <i class="fab fa-facebook"></i> <i class="fab fa-instagram"></i></div>
+                <div>
+                    <a href="#" class="text-white text-decoration-none ms-3">Help</a>
+                    <a href="#" class="text-white text-decoration-none ms-3">Notifications</a>
+                    <a href="#" class="text-white text-decoration-none ms-3">Cart</a>
+                    <a href="#" class="text-white text-decoration-none ms-3">Register</a>
+                    <a href="#" class="text-white text-decoration-none ms-3">Login</a>
+                </div>
+            </div>
+            <div class="d-flex align-items-center gap-4 py-3">
+                <div class="navbar-brand text-white">
+                    <i class="fas fa-shopping-bag me-2"></i>LocalMart
+                </div>
+                <div class="search-box flex-grow-1 bg-white rounded d-flex">
+                    <input type="text" class="form-control border-0" placeholder="Sign up and get 100% off on your first order!">
+                    <button class="btn btn-danger"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="position-relative" style="cursor: pointer;" id="cartIcon">
+                    <i class="fas fa-shopping-cart fa-lg"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-white text-danger" id="cartCount">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container-fluid px-4 my-4">
+        <div class="row g-4">
+            </h1>
+            <!-- SIDEBAR -->
+            <div class="col-lg-2 col-md-3 d-none d-md-block">
+                <div class="card shadow-sm sticky-top" style="top: 140px; z-index: 100;">
+                    <div class="card-header bg-white fw-bold">CATEGORIES</div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item category-item"><a href="mobile&gadgets.html" class="text-decoration-none text-dark"><i class="fas fa-mobile-alt me-2"></i>Mobiles & Gadgets</a></li>
+                        <li class="list-group-item category-item"><a href="mens-fashion.html" class="text-decoration-none text-dark"><i class="fas fa-tshirt me-2"></i>Men's Fashion</a></li>
+                        <li class="list-group-item category-item"><a href="womens-fashion.html" class="text-decoration-none text-dark"><i class="fas fa-female me-2"></i>Women's Fashion</a></li>
+                        <li class="list-group-item category-item"><a href="home-living.html" class="text-decoration-none text-dark"><i class="fas fa-home me-2"></i>Home & Living</a></li>
+                        <li class="list-group-item category-item"><a href="gaming.html" class="text-decoration-none text-dark"><i class="fas fa-gamepad me-2"></i>Gaming</a></li>
+                        <li class="list-group-item category-item"><a href="pet-care.html" class="text-decoration-none text-dark"><i class="fas fa-paw me-2"></i>Pet Care</a></li>
+                        <li class="list-group-item category-item"><a href="baby-toys.html" class="text-decoration-none text-dark"><i class="fas fa-baby me-2"></i>Baby & Toys</a></li>
+                        <li class="list-group-item category-item"><a href="sports-outdoors.html" class="text-decoration-none text-dark"><i class="fas fa-running me-2"></i>Sports & Outdoors</a></li>
+                        <li class="list-group-item category-item"><a href="food-beverages.html" class="text-decoration-none text-dark"><i class="fas fa-utensils me-2"></i>Food & Beverages</a></li>
+                        <li class="list-group-item category-item"><a href="automotive.html" class="text-decoration-none text-dark"><i class="fas fa-car me-2"></i>Automotive</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- MAIN CONTENT -->
+            <div class="col-lg-10 col-md-9 col-12">
+                
+                <!-- can remove -->
+                <h1>lamutaks</h1>
+                <!-- BANNERS -->
+
+                <!-- RECOMMENDED PRODUCTS -->
+                <div class="card shadow-sm">
+                    <div class="card-header bg-white text-danger fw-bold text-uppercase">Recommended For You</div>
+                    <div class="card-body">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white py-4 mt-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-6 mb-3">
+                    <h6 class="fw-bold">Customer Service</h6>
+                    <ul class="list-unstyled small text-muted">
+                        <li>Help Centre</li>
+                        <li>Returns & Refunds</li>
+                        <li>Shipping Info</li>
+                        <li>Track Order</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <h6 class="fw-bold">About LocalMart</h6>
+                    <ul class="list-unstyled small text-muted">
+                        <li>About Us</li>
+                        <li>Careers</li>
+                        <li>Terms & Conditions</li>
+                        <li>Privacy Policy</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <h6 class="fw-bold">Payment Methods</h6>
+                    <ul class="list-unstyled small text-muted">
+                        <li>Credit/Debit Cards</li>
+                        <li>PayPal</li>
+                        <li>Digital Wallets</li>
+                        <li>Bank Transfer</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <h6 class="fw-bold">Contact Us</h6>
+                    <ul class="list-unstyled small text-muted">
+                        <li><i class="fas fa-envelope me-2"></i>support@localmart.com</li>
+                        <li><i class="fas fa-phone me-2"></i>1-800-LOCALMART</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i>123 Commerce Street</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="text-center small text-muted">
+                &copy; 2026 LocalMart. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
