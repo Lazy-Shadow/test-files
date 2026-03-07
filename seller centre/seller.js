@@ -76,7 +76,14 @@ function addProduct() {
     renderProducts();
     form.reset();
     bootstrap.Modal.getInstance(document.getElementById('addProductModal')).hide();
+
+    Swal.fire({
+    title: "Succesfully  Added Product",
+    text: "Uploaded product has been added to your inventory.",
+    icon: "success"
+});
 }
+
 
 // Edit product
 function editProduct(id) {
@@ -159,6 +166,8 @@ function viewProduct(id) {
 function deleteProduct(id) {
     productIdToDelete = id;
     new bootstrap.Modal(document.getElementById('deleteProductModal')).show();
+
+    
 }
 
 // Confirm delete
@@ -169,5 +178,11 @@ function confirmDelete() {
         renderProducts();
         productIdToDelete = null;
         bootstrap.Modal.getInstance(document.getElementById('deleteProductModal')).hide();
+
+        Swal.fire({
+    title: "Succesfully  Deleted Product",
+    text: "Uploaded product has been deleted from your inventory.",
+    icon: "success"
+});
     }
 }
