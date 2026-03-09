@@ -20,7 +20,6 @@
                 </div>
                 <div class="d-flex gap-3 small text-white fw-medium">
                     <a href="#" class="text-white text-decoration-none">Help Center</a>
-                    <a href="#" class="text-white text-decoration-none">My Orders</a>
                 </div>
             </div>
 
@@ -44,12 +43,17 @@
 
                 <div
                     class="col-md-3 col-12 d-flex justify-content-md-end justify-content-center gap-4 align-items-center text-white">
-                    <div class="position-relative" role="button">
+                    <div class="text-center" id="myOrdersButton" role="button" title="My Orders" onclick="openMyOrdersModal()">
+                        <i class="fas fa-clipboard-list fa-lg"></i>
+                        <div class="small mt-1">My Orders</div>
+                    </div>
+                    <div class="text-center position-relative" role="button" title="Shopping Cart">
                         <i class="fas fa-shopping-basket fa-lg"></i>
                         <span
                             class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-2 border-success">
                             3
                         </span>
+                        <div class="small mt-1">Shopping Cart</div>
                     </div>
                     <button class="btn btn-outline-light rounded-pill px-4 fw-bold">Sell Item</button>
                 </div>
@@ -248,7 +252,206 @@
         </div>
     </footer>
 
+    <!-- Product Modal -->
+    <div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header border-0 pb-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body pt-0">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img id="modalProductImage" src="" class="img-fluid rounded-3" alt="Product">
+                        </div>
+                        <div class="col-md-6">
+                            <span id="modalProductCondition" class="badge mb-2"></span>
+                            <h4 id="modalProductTitle" class="fw-bold mb-2"></h4>
+                            <h3 id="modalProductPrice" class="text-success fw-bold mb-3"></h3>
+                            <div class="d-flex align-items-center mb-3 text-muted small">
+                                <i class="fas fa-user-circle me-2"></i>
+                                <span id="modalProductSeller"></span>
+                            </div>
+                            <div class="mb-3">
+                                <h6 class="fw-bold">Description</h6>
+                                <p id="modalProductDescription" class="text-muted small mb-0"></p>
+                            </div>
+                            <div class="action-buttons mb-3">
+                                <button class="btn btn-success" onclick="addToCart()">
+                                    <i class="fas fa-cart-plus me-2"></i>Add to Cart <span id="cartPrice"></span>
+                                </button>
+                                <button class="btn btn-warning" onclick="buyNow()">
+                                    <i class="fas fa-shopping-bag me-2"></i>Buy Now <span id="buyPrice"></span>
+                                </button>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button class="btn btn-outline-success rounded-pill" id="chatButton" onclick="toggleChat()">
+                                    <i class="fas fa-comment-dots me-2"></i>Chat with Seller
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Received Modal -->
+    <div class="modal fade" id="receivedModal" tabindex="1050" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered" style="z-index: 1060;">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fw-bold"><i class="fas fa-box-open text-success me-2"></i>Rate Your Purchase</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-3">
+                        <img id="receivedProductImage" src="" class="rounded" style="max-height: 120px;" alt="Product">
+                        <h6 id="receivedProductTitle" class="mt-2 fw-bold"></h6>
+                        <p id="receivedProductPrice" class="text-success fw-bold mb-0"></p>
+                    </div>
+                    <div class="star-rating mb-3">
+                        <i class="fas fa-star star" data-rating="1"></i>
+                        <i class="fas fa-star star" data-rating="2"></i>
+                        <i class="fas fa-star star" data-rating="3"></i>
+                        <i class="fas fa-star star" data-rating="4"></i>
+                        <i class="fas fa-star star" data-rating="5"></i>
+                        <span class="rating-text ms-2 text-muted">Click to rate</span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Add Photo (optional)</label>
+                        <div class="review-image-upload" onclick="document.getElementById('receivedReviewImage').click()">
+                            <i class="fas fa-camera fa-lg text-muted"></i>
+                            <span class="text-muted small">Click to upload image</span>
+                            <img id="receivedPreviewImage" class="preview-image" style="display: none;">
+                        </div>
+                        <input type="file" id="receivedReviewImage" accept="image/*" style="display: none;" onchange="previewReceivedImage(event)">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-bold">Your Feedback</label>
+                        <textarea id="receivedFeedback" class="form-control" rows="3" placeholder="Share your experience with this product..."></textarea>
+                    </div>
+                    <button class="btn btn-success w-100" onclick="submitReceivedReview()">
+                        <i class="fas fa-paper-plane me-2"></i>Submit Review
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Orders Modal -->
+    <div class="modal fade" id="myOrdersModal" tabindex="1040" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" style="z-index: 1050;">
+            <div class="modal-content border-0 shadow-lg rounded-4">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title fw-bold"><i class="fas fa-clipboard-list text-success me-2"></i>My Orders</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row g-3">
+                        <!-- Order Item 1 -->
+                        <div class="col-12">
+                            <div class="card border-0 shadow-sm rounded-3 p-3">
+                                <div class="d-flex gap-3">
+                                    <img src="https://via.placeholder.com/100/28a745/ffffff?text=Textbook" class="rounded" alt="Order Item" style="width: 100px; height: 100px; object-fit: cover;">
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <div>
+                                                <h6 class="fw-bold mb-1">Organic Chemistry Textbook</h6>
+                                                <p class="text-success fw-bold mb-1">₱1,350.00</p>
+                                                <span class="badge bg-success bg-opacity-10 text-success">Delivered</span>
+                                            </div>
+                                            <div class="text-end">
+                                                <small class="text-muted">Order #1024</small>
+                                                <div class="small text-muted">Dec 15, 2024</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex gap-2 mt-2">
+                                            <button class="btn btn-sm btn-outline-success" onclick="showReceivedModalForOrder('Organic Chemistry Textbook', '₱1,350.00', 'https://via.placeholder.com/250/28a745/ffffff?text=Textbook')">
+                                                <i class="fas fa-star me-1"></i>Rate Item
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Order Item 2 -->
+                        <div class="col-12">
+                            <div class="card border-0 shadow-sm rounded-3 p-3">
+                                <div class="d-flex gap-3">
+                                    <img src="https://via.placeholder.com/100/ffc107/ffffff?text=Bike" class="rounded" alt="Order Item" style="width: 100px; height: 100px; object-fit: cover;">
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <div>
+                                                <h6 class="fw-bold mb-1">Mountain Bike</h6>
+                                                <p class="text-success fw-bold mb-1">₱8,100.00</p>
+                                                <span class="badge bg-warning bg-opacity-10 text-warning">In Transit</span>
+                                            </div>
+                                            <div class="text-end">
+                                                <small class="text-muted">Order #1023</small>
+                                                <div class="small text-muted">Dec 14, 2024</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex gap-2 mt-2">
+                                            <button class="btn btn-sm btn-outline-info">
+                                                <i class="fas fa-truck me-1"></i>Track
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Order Item 3 -->
+                        <div class="col-12">
+                            <div class="card border-0 shadow-sm rounded-3 p-3">
+                                <div class="d-flex gap-3">
+                                    <img src="https://via.placeholder.com/100/17a2b8/ffffff?text=Calculator" class="rounded" alt="Order Item" style="width: 100px; height: 100px; object-fit: cover;">
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <div>
+                                                <h6 class="fw-bold mb-1">Graphing Calculator</h6>
+                                                <p class="text-success fw-bold mb-1">₱4,590.00</p>
+                                                <span class="badge bg-primary bg-opacity-10 text-primary">Processing</span>
+                                            </div>
+                                            <div class="text-end">
+                                                <small class="text-muted">Order #1022</small>
+                                                <div class="small text-muted">Dec 13, 2024</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-popup" id="chatPopup">
+        <div class="chat-header">
+            <h6 class="m-0 fw-bold"><i class="fas fa-comments me-2"></i>Chat with Seller</h6>
+            <button class="btn-close btn-close-white" onclick="toggleChat()"></button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="message received">
+                <div class="message-content">
+                    Hi! Is this item still available?
+                </div>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chatInput" placeholder="Type a message..." class="form-control">
+            <button class="btn btn-success" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="campus-canteen.js"></script>
 </body>
 
 </html>

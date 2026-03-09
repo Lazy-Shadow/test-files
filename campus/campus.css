@@ -143,3 +143,155 @@ footer {
     color: var(--success-dark);
     font-weight: 600;
 }
+
+.chat-popup {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 320px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+    z-index: 2000;
+    display: none;
+    overflow: hidden;
+}
+
+.chat-popup.show {
+    display: block;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.chat-header {
+    background: var(--primary);
+    color: white;
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-messages {
+    height: 250px;
+    padding: 15px;
+    overflow-y: auto;
+    background: #f8f9fa;
+}
+
+.message {
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.message.sent {
+    justify-content: flex-end;
+}
+
+.message.received {
+    justify-content: flex-start;
+}
+
+.message-content {
+    max-width: 80%;
+    padding: 8px 12px;
+    border-radius: 12px;
+    font-size: 0.875rem;
+}
+
+.message.sent .message-content {
+    background: var(--primary);
+    color: white;
+    border-bottom-right-radius: 2px;
+}
+
+.message.received .message-content {
+    background: #e9ecef;
+    color: #212529;
+    border-bottom-left-radius: 2px;
+}
+
+.chat-input {
+    display: flex;
+    gap: 8px;
+    padding: 12px;
+    border-top: 1px solid #dee2e6;
+}
+
+.chat-input input {
+    border-radius: 20px;
+    padding: 8px 15px;
+}
+
+.chat-input button {
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.action-buttons .btn {
+    flex: 1;
+    font-weight: 600;
+}
+
+.star-rating {
+    display: flex;
+    align-items: center;
+}
+
+.star-rating .star {
+    font-size: 1.5rem;
+    color: #dee2e6;
+    cursor: pointer;
+    transition: color 0.2s;
+    margin-right: 3px;
+}
+
+.star-rating .star.active,
+.star-rating .star:hover {
+    color: #ffc107;
+}
+
+.review-image-upload {
+    border: 2px dashed #dee2e6;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.review-image-upload:hover {
+    border-color: var(--primary);
+    background: var(--success-light);
+}
+
+.preview-image {
+    max-width: 100%;
+    max-height: 150px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
